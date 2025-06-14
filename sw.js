@@ -1,1 +1,12 @@
-self.addEventListener('install', (e) => {e.waitUntil(caches.open('spice-connect-cache').then((cache) => {return cache.addAll(['/', '/index.html', '/manifest.json', '/sw.js']);}));});self.addEventListener('fetch', (e) => {e.respondWith(caches.match(e.request).then((response) => {return response || fetch(e.request);}));});
+self.addEventListener('install', event => {
+  console.log('Service worker installing...');
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', event => {
+  console.log('Service worker activating...');
+});
+
+self.addEventListener('fetch', event => {
+  event.respondWith(fetch(event.request));
+});
